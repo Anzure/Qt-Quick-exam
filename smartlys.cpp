@@ -1,3 +1,4 @@
+// smartlys.cpp
 #include "SmartLys.h"
 
 SmartLys::SmartLys(QObject *parent) : QObject(parent), m_status(false) {}

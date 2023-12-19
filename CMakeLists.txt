@@ -14,7 +14,9 @@ if (Qt6_VERSION VERSION_GREATER_EQUAL 6.3)
 endif()
 
 qt_add_executable(QtQuickExamApp main.cpp
-    modelcontroller.h modelcontroller.cpp)
+
+    smartlys.h smartlys.cpp
+    smartlys.h smartlys.cpp)
 
 qt_add_resources(QtQuickExamApp "configuration"
     PREFIX "/"

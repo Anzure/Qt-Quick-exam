@@ -3,7 +3,18 @@
 
 ModelController::ModelController(QObject *parent) : QObject(parent)
 {
-    textValue = "Nytt objekt";
+
+}
+
+QString ModelController::getMyProperty() const
+{
+    return myProperty;
+}
+
+void ModelController::setMyProperty(QString value)
+{
+    myProperty = value;
+    emit myPropertyChanged();
 }
 
 void ModelController::requestData(QString input)
@@ -11,8 +22,12 @@ void ModelController::requestData(QString input)
     qDebug() << "Inndata verdi: " + input;
     if (input == nullptr)
     {
-        emit dataFailure("Ugyldig verdi.");
+        setMyProperty("{data: null, error: true}");
+        emit dataFailure("Ugyldig verdi");
     }
-    QString responseStr = "Hallo verden!";
-    emit receiveData(responseStr);
+    else {
+        QString responseStr = input;
+        setMyProperty("{data: '" + input + "', error: false}");
+        emit receiveData(responseStr);
+    }
 }

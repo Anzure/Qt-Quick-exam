@@ -8,6 +8,7 @@ ApplicationWindow {
     visible: true
     width: 400
     height: 300
+    title: "Smart Lysstyring"
 
     // Tilgjengeliggjør C++-klassen SmartLys
     SmartLys {

@@ -6,28 +6,22 @@ ModelController::ModelController(QObject *parent) : QObject(parent)
 
 }
 
-QString ModelController::getMyProperty() const
+QString ModelController::getSampleValue() const
 {
-    return myProperty;
+    return sampleValue;
 }
 
-void ModelController::setMyProperty(QString value)
+void ModelController::setSampleValue(QString value)
 {
-    myProperty = value;
-    emit myPropertyChanged();
-}
-
-void ModelController::requestData(QString input)
-{
-    qDebug() << "Inndata verdi: " + input;
-    if (input == nullptr)
+    qDebug() << "Inndata verdi: " + value;
+    if (value == nullptr)
     {
-        setMyProperty("{data: null, error: true}");
-        emit dataFailure("Ugyldig verdi");
+        emit sampleValueFailure("Ugyldig data");
     }
     else {
-        QString responseStr = input;
-        setMyProperty("{data: '" + input + "', error: false}");
-        emit receiveData(responseStr);
+        QString responseStr = value;
+        sampleValue = responseStr;
+        emit sampleValueChanged();
     }
+
 }

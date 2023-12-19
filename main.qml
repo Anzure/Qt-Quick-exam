@@ -8,16 +8,14 @@ ApplicationWindow {
     height: 800
     visible: true
 
-    property string currentData: "Ingen data"
-
     Connections {
         target: modelController
-        onReceiveData: {
-            console.log("Retrived data:", data);
-            currentData = data;
+        onSampleValueChanged: {
+            console.log("Retrived data:", modelController.sampleValue);
             errorView.visible = false;
+            myInput.text = "";
         }
-        onDataFailure: {
+        onSampleValueFailure: {
             console.log("Data failure:", error);
             errorView.visible = true;
             errorText.text = error;
@@ -41,15 +39,9 @@ ApplicationWindow {
             }
             TextField {
                 id: myOutput
-                text: currentData
+                text: modelController.sampleValue
                 width: parent.width / 2
                 readOnly: true
-            }
-            Text {
-                id: propValue
-                text: modelController.myProperty
-                color: "grey"
-                font.pixelSize: 20
             }
         }
 
@@ -71,9 +63,8 @@ ApplicationWindow {
                 id: searchButton
                 text: "OK"
                 onClicked: {
-                    console.log("Data requested:",myInput.text);
-                    modelController.requestData(myInput.text);
-                    myInput.text = "";
+                    console.log("Data requested:", myInput.text);
+                    modelController.setSampleValue(myInput.text);
                 }
             }
         }

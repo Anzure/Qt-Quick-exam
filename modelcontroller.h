@@ -6,21 +6,19 @@
 class ModelController : public QObject
 {
     Q_OBJECT
-    Q_PROPERTY(QString myProperty READ getMyProperty WRITE setMyProperty NOTIFY myPropertyChanged)
+    Q_PROPERTY(QString sampleValue READ getSampleValue WRITE setSampleValue NOTIFY sampleValueChanged)
 
 public:
     explicit ModelController(QObject *parent = nullptr);
-    QString getMyProperty() const;
-    void setMyProperty(QString value);
-    QString myProperty = "";
+    QString getSampleValue() const;
+    QString sampleValue = "Ingen data";
 
 signals:
-    void receiveData(const QString &data);
-    void dataFailure(const QString &error);
-    void myPropertyChanged();
+    void sampleValueFailure(const QString &error);
+    void sampleValueChanged();
 
 public slots:
-    void requestData(QString input);
+    void setSampleValue(QString value);
 };
 
 #endif // MODELCONTROLLER_H
